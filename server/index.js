@@ -1,12 +1,12 @@
 import express from "express"
 import jwt from "jsonwebtoken"
 import mongoose from "mongoose"
-import bcrypt from "bcrypt "
+import bcrypt from "bcrypt"
 import { validationResult } from "express-validator"
 import { registerValidation } from "./validations/auth.js"
 import UserModel from "./models/User.js"
 
-mongoose.connect("mongodb+srv://admin:21123145@cluster0.olilxg5.mongodb.net/?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://admin:21123145@cluster0.olilxg5.mongodb.net/Web-Blog?retryWrites=true&w=majority")
 .then(()=> {
     console.log("DB is connected");
 })
@@ -38,9 +38,7 @@ app.post("/auth/register",registerValidation, async (req,res)=> {
 
     const user = await doc.save();
 
-    res.json({
-        success:true
-    })
+    res.json(user)
 
 
 })
