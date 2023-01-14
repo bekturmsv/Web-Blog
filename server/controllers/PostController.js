@@ -49,6 +49,39 @@ export const getOne = async(req,res)=> {
     }
 }
 
+export const remove = async(req,res)=> {
+    try {
+        const postId = req.params.id;
+       
+        PostModel.findOneAndDelete({
+            _id:postId
+        }, (err,doc)=>{
+            if(err){
+                console.log(error);
+                   return res.status(500).json({
+                        message: "Не удалось удалить статью"
+                    })
+            }
+
+            if(!doc){
+                return res.status(404).json({
+                    message: "Статья не найдена"
+                })
+            }
+
+            res.json({
+                success: true
+            })
+        })
+
+    } catch (error) {
+        console.log(error);
+            res.status(500).json({
+                message: "Не удалось создать статью"
+            })
+    }
+}
+
 export const create = async (req,res)=> {
         try {
             const doc = new PostModel({
