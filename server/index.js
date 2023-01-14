@@ -5,6 +5,8 @@ import bcrypt from "bcrypt"
 import { validationResult } from "express-validator"
 import { registerValidation } from "./validations/auth.js"
 import UserModel from "./models/User.js"
+import chekAuth from "./utils/chekAuth.js";
+import User from "./models/User.js"
 
 mongoose.connect("mongodb+srv://admin:21123145@cluster0.olilxg5.mongodb.net/Web-Blog?retryWrites=true&w=majority")
 .then(()=> {
@@ -95,7 +97,28 @@ try{
         message: "Не удалось зарегистрироваться",
     })
 }
+})
 
+app.get("/auth/profile",chekAuth,async  (req,res)=> {
+    try {
+
+        const user = await UserModel.findById(req.userId)
+        if(!user){
+            return res.status(404)({
+                message: "Пользователь не надйен"
+            })
+        }
+
+        const {passwordHash, ...userData } = user._doc
+
+    res.json(userData)
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Нет доступа"
+        })
+    }
 })
 
 app.listen(5000, (err)=>{
