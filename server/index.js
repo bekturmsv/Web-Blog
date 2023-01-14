@@ -23,7 +23,7 @@ app.post("/auth/register",registerValidation, UserController.register )
 app.get("/auth/profile",chekAuth, UserController.getUserInfo)
 
 app.get("/posts",PostController.getAll)
-// app.get("/posts/:id", PostController.getOne)
+app.get("/posts/:id", PostController.getOne)
 app.post("/posts", chekAuth, postCreateValidation, PostController.create)
 // app.delete("/posts", PostController.remove)
 // app.patch("/posts", PostController.update)
