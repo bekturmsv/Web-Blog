@@ -26,7 +26,7 @@ app.get("/posts",PostController.getAll)
 app.get("/posts/:id", PostController.getOne)
 app.post("/posts", chekAuth, postCreateValidation, PostController.create)
 app.delete("/posts/:id", chekAuth, PostController.remove)
-// app.patch("/posts", PostController.update)
+app.patch("/posts/:id",chekAuth, PostController.update)
 
 
 app.listen(5000, (err)=>{
