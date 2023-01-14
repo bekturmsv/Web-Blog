@@ -25,7 +25,7 @@ app.get("/auth/profile",chekAuth, UserController.getUserInfo)
 app.get("/posts",PostController.getAll)
 app.get("/posts/:id", PostController.getOne)
 app.post("/posts", chekAuth, postCreateValidation, PostController.create)
-// app.delete("/posts", PostController.remove)
+app.delete("/posts/:id", chekAuth, PostController.remove)
 // app.patch("/posts", PostController.update)
 
 
