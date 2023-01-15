@@ -1,5 +1,6 @@
 import express from "express"
 import mongoose from "mongoose"
+import multer from "multer"
 import { registerValidation, loginValidation } from "./validations/auth.js"
 import chekAuth from "./utils/chekAuth.js";
 import * as UserController from "./controllers/UserController.js"
@@ -16,11 +17,28 @@ mongoose.connect("mongodb+srv://admin:21123145@cluster0.olilxg5.mongodb.net/Web-
 
 const app = express()
 
+const storage = multer.diskStorage({
+    destination: (_, file, cb)=> {
+        cb(null, "uploads");
+    },
+    filename: (_, file, cb)=> {
+        cb(null, file.originalname)
+    }
+})
+
+const upload = multer({storage})
+
 app.use(express.json())
 
 app.post("/auth/login",loginValidation, UserController.login )
 app.post("/auth/register",registerValidation, UserController.register )
 app.get("/auth/profile",chekAuth, UserController.getUserInfo)
+
+app.post("/upload", chekAuth, upload.single("image"),(req,res)=>{
+    res.json({
+        url:`/uploads/${req.file.originalname}`
+    })
+})
 
 app.get("/posts",PostController.getAll)
 app.get("/posts/:id", PostController.getOne)
