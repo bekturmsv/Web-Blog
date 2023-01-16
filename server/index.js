@@ -4,6 +4,7 @@ import multer from "multer"
 import { registerValidation, loginValidation } from "./validations/auth.js"
 import  {UserController, PostController} from "./controllers/index.js"
 import { postCreateValidation } from "./validations/post.js";
+import cors from "cors"
 import {handleValidationErrors,chekAuth} from "./utils/index.js"
 mongoose.connect("mongodb+srv://admin:21123145@cluster0.olilxg5.mongodb.net/Web-Blog?retryWrites=true&w=majority")
 .then(()=> {
@@ -27,6 +28,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 app.use(express.json())
+app.use(cors())
 app.use("/uploads", express.static("uploads"))
 
 app.post("/auth/login",loginValidation, handleValidationErrors,UserController.login )
