@@ -2,12 +2,17 @@ import React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
-
+import axios from "../axios"
 import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 
 export const Home = () => {
+
+  React.useEffect(()=>{
+    axios.get("/posts")
+  },[])
+
   return (
     <>
       <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
@@ -30,6 +35,7 @@ export const Home = () => {
               viewsCount={150}
               commentsCount={3}
               tags={['react', 'fun', 'typescript']}
+              isLoading={true}
               isEditable
             />
           ))}
