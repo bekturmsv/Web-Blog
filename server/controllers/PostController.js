@@ -12,6 +12,25 @@ export const getAll = async(req,res)=> {
     }
 }
 
+export const getLastTags = async (req,res)=> {
+    try {
+        const posts = await PostModel.find().limit(5).exec();
+
+        const tags = posts.map(obj => obj.tags.slice(0,5))
+
+        const tags_filter = tags.filter((el)=> {
+          return (el.length != 0)
+        }).flat()
+
+        res.json(tags_filter)
+    } catch (error) {
+        console.log(error);
+            res.status(500).json({
+                message: "Не удалось создать статьи"
+            })
+    }
+}
+
 export const getOne = async(req,res)=> {
     try {
         const postId = req.params.id;
