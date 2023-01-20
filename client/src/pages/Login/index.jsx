@@ -6,10 +6,12 @@ import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form"
 import styles from "./Login.module.scss";
 import {useDispatch, useSelector} from "react-redux"
-import { fetchAuth } from "../../redux/slices/auth";
+import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
+import { Navigate } from "react-router-dom";
+
 
 export const Login = () => {
-
+  const isAuth = useSelector(selectIsAuth)
   const dispatch = useDispatch()
 
   const { register, handleSubmit, setError, formState : {errors, isValid} } = useForm({
@@ -24,7 +26,10 @@ export const Login = () => {
     dispatch(fetchAuth(values))
   }
 
-  console.log(isValid);
+  if(isAuth){
+    return <Navigate to="/"/>
+  }
+
   return (
     <Paper classes={{ root: styles.root }}>
       <Typography classes={{ root: styles.title }} variant="h5">
