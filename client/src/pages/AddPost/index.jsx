@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SimpleMDE from 'react-simplemde-editor';
-
+import axiosBaseUrl from '../../axios';
 import 'easymde/dist/easymde.min.css';
 import styles from './AddPost.module.scss';
 import { useSelector } from 'react-redux';
@@ -16,11 +16,25 @@ export const AddPost = () => {
 
   const imageUrl = '';
   const [value, setValue] = React.useState('');
-  const [postObj, setPostObj] = React.useState({title:"", tags: "", value: ""});
+  const [postObj, setPostObj] = React.useState({title:"", tags: "", imageUrl: ""});
 
-  const handleChangeFile = () => {};
+  const inputImageRef = useRef(null)
 
-  const onClickRemoveImage = () => {};
+  const handleChangeFile = async (event) => {
+    try {
+      const formData = new FormData();
+      const file = event.target.files[0];
+      formData.append("image", file)
+      const {data} = await axiosBaseUrl.post("/upload", formData);
+      setPostObj({...postObj, imageUrl: data.url})
+    } catch (error) {
+      console.warn(error);
+      alert("Ошибка при загрузке файла")
+    } 
+  };
+
+  const onClickRemoveImage =  () => {
+  };
 
   const onChange = React.useCallback((value) => {
     setValue(value);
@@ -41,24 +55,24 @@ export const AddPost = () => {
     [],
   );
 
+
     if((!window.localStorage.getItem("token")) &&!isAuth){
       return <Navigate to="/"/>
     }
 
-console.log(postObj);
   return (
     <Paper style={{ padding: 30 }}>
-      <Button variant="outlined" size="large">
+      <Button onClick={()=> inputImageRef.current.click()} variant="outlined" size="large">
         Загрузить превью
       </Button>
-      <input type="file" onChange={handleChangeFile} hidden />
-      {imageUrl && (
+      <input ref={inputImageRef} type="file" onChange={handleChangeFile}  hidden />
+      {postObj.imageUrl && (
+       <>
         <Button variant="contained" color="error" onClick={onClickRemoveImage}>
           Удалить
         </Button>
-      )}
-      {imageUrl && (
-        <img className={styles.image} src={`http://localhost:4444${imageUrl}`} alt="Uploaded" />
+        <img className={styles.image} src={`http://localhost:5000${postObj.imageUrl}`} alt="Uploaded" />
+       </>
       )}
       <br />
       <br />
