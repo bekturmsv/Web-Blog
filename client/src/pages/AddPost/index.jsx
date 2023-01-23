@@ -47,7 +47,7 @@ export const AddPost = () => {
 
   const onSubmit = async () => {
     try {
-      setLoading(true)
+      setLoading(true) 
       const obj = {...postObj,text}
       console.log(obj);
       const {data} = await axiosBaseUrl.post("/posts", obj)
