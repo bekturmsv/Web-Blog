@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
@@ -8,14 +8,15 @@ import 'easymde/dist/easymde.min.css';
 import styles from './AddPost.module.scss';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../redux/slices/auth';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 export const AddPost = () => {
-
+  const {id} = useParams();
   const isAuth = useSelector(selectIsAuth)
   const navigate = useNavigate()
   const [isLoading, setLoading] = useState(false)
   const [text,setText] = useState("")
+  const isEditing = Boolean(id)
   const [postObj, setPostObj] = React.useState({
     title:"", 
     tags: "", 
@@ -49,15 +50,31 @@ export const AddPost = () => {
     try {
       setLoading(true) 
       const obj = {...postObj,text}
-      console.log(obj);
-      const {data} = await axiosBaseUrl.post("/posts", obj)
-      const id = data._id
-      navigate(`/posts/${id}`)
+      const {data} = isEditing 
+      ? 
+      await axiosBaseUrl.patch(`/posts/${id}`, obj) 
+      : 
+      await axiosBaseUrl.post("/posts", obj)
+
+      const _id = isEditing ? id : data._id
+      navigate(`/posts/${_id}`)
 
     } catch (error) {
       console.warn("Ошибка при создании статьи!")
     }
   }
+
+  useEffect(()=> {
+    if(id){
+      axiosBaseUrl.get(`/posts/${id}`).then(({data})=>{
+        setPostObj({title: data.title, tags : data.tags, imageUrl: data.imageUrl})
+        setText(data.text)
+      }).catch(err => {
+        console.warn(err)
+        alert(err)
+      })
+    }
+  },[])
 
   const options = React.useMemo(
     () => ({  
@@ -84,7 +101,7 @@ export const AddPost = () => {
   return (
     <Paper style={{ padding: 30 }}>
       <Button onClick={()=> inputImageRef.current.click()} variant="outlined" size="large">
-        Загрузить превью
+        {isEditing? "Изменить превью" : "Загрузить превью"}
       </Button>
       <input ref={inputImageRef} type="file" onChange={handleChangeFile}  hidden />
       {postObj.imageUrl && (
@@ -115,7 +132,7 @@ export const AddPost = () => {
       <SimpleMDE className={styles.editor} value={text} onChange={onChange} options={options} />
       <div className={styles.buttons}>
         <Button onClick={onSubmit} size="large" variant="contained">
-          Опубликовать
+         {isEditing ? "Сохранить" : "Опубликовать"}
         </Button>
         <a href="/">
           <Button size="large">Отмена</Button>
