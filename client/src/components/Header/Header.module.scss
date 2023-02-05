@@ -34,9 +34,17 @@
     margin-left: 10px;
     background-color: rgb(28, 18, 53);
     color: #fff;
+    font-weight: bold;
   }
-
+  
   a {
     text-decoration: none;
+  }
+
+  display: flex;
+  align-items: center;
+
+  .avatarLogo{
+    margin-left: 10px;
   }
 }
