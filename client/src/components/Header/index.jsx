@@ -5,6 +5,7 @@ import styles from "./Header.module.scss";
 import Container from "@mui/material/Container";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, selectIsAuth } from "../../redux/slices/auth";
+import { Avatar } from "@mui/material";
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,11 @@ export const Header = () => {
                   Выйти
                 </Button>
                 <Link to={`/profile/${userData._id}`}>
-                  <Button variant="contained">Профиль</Button>
+                  <Avatar
+                    className={styles.avatarLogo}
+                    sx={{ width: 40, height: 40 }}
+                    src={`http://localhost:5000${userData.avatarUrl}`}
+                  />
                 </Link>
               </>
             ) : (
