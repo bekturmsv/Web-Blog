@@ -36,7 +36,7 @@ app.post("/auth/register",  registerValidation,handleValidationErrors, UserContr
 app.get("/auth/profile",chekAuth, UserController.getUserInfo)
 app.patch("/auth/profile/:id",chekAuth, updateValidation, handleValidationErrors, UserController.update)
 
-app.post("/upload", chekAuth, upload.single("image"),(req,res)=>{
+app.post("/upload", upload.single("image"),(req,res)=>{
     res.json({
         url:`/uploads/${req.file.originalname}`
     })
