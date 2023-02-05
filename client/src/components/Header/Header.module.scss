@@ -11,7 +11,7 @@
 }
 
 .logo {
-  background-color: black;
+  background-color: rgb(28, 18, 53);
   color: #fff;
   font-weight: 700;
   line-height: 35px;
@@ -20,15 +20,20 @@
   border-radius: 5px;
   padding: 0 10px;
   text-decoration: none;
+  transition: all .5s;
 
   &:hover {
-    background-color: #4361ee;
+    background-color: #ecebea;
+    color: #000;
+
   }
 }
 
 .buttons {
   button {
     margin-left: 10px;
+    background-color: rgb(28, 18, 53);
+    color: #fff;
   }
 
   a {
