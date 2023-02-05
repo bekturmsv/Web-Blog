@@ -100,3 +100,26 @@ export const getUserInfo = async  (req,res)=> {
         })
     }
 }
+
+export const update = async (req,res) => {
+    try {
+        const userId = req.params.id;
+        await UserModel.updateOne({
+            _id:userId
+        },{
+            fullName: req.body.fullName,
+            email: req.body.email,
+            imageUrl: req.body.imageUrl,
+
+        })
+
+        res.json({
+            success:true
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Не удалось изменить пользовательские данные"
+        })
+    }
+}

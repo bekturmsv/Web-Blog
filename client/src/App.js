@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchAuthMe } from "./redux/slices/auth";
+import Profile from "./pages/Profile";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/add" element={<AddPost/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Registration/>} />
+          <Route path="/profile/:id" element={<Profile/>} />
         </Routes>
       </Container>
     </>
