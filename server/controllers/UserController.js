@@ -109,7 +109,7 @@ export const update = async (req,res) => {
         },{
             fullName: req.body.fullName,
             email: req.body.email,
-            imageUrl: req.body.imageUrl,
+            avatarUrl: req.body.avatarUrl,
 
         })
 
