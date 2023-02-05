@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Avatar, Button } from "@material-ui/core";
 import axiosBaseUrl from "../../axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = () => {
+  const inputImageRef = useRef(null);
+
   const userData = useSelector((state) => state.auth.data);
   const classes = useStyles();
   const [user, setUser] = useState({});
@@ -37,12 +39,30 @@ const Profile = () => {
     setUser(data);
   }
 
+  const onClickRemoveImage = () => {
+    setUser({ ...user, avatarUrl: "" });
+  };
+
+  const handleChangeFile = async (event) => {
+    try {
+      const formData = new FormData();
+      const file = event.target.files[0];
+      formData.append("image", file);
+      const { data } = await axiosBaseUrl.post("/upload", formData);
+      setUser({ ...user, avatarUrl: data.url });
+    } catch (error) {
+      console.warn(error);
+      alert("Ошибка при загрузке файла");
+    }
+  };
+
   useEffect(() => {
     showProfile();
   }, []);
 
   async function saveDb() {
     await axiosBaseUrl.patch(`/auth/profile/${userData._id}`, user);
+    console.log(user);
     setEdit(false);
     console.log("Save db");
   }
@@ -57,7 +77,7 @@ const Profile = () => {
                 <div className="ava">
                   <Avatar
                     alt="Remy Sharp"
-                    src={user.avatar}
+                    src={`http://localhost:5000${user.avatarUrl}`}
                     className={classes.large}
                   />
                   <span className="nick">{user.name}</span>
@@ -76,9 +96,19 @@ const Profile = () => {
                 <div className="ava">
                   <Avatar
                     alt="Remy Sharp"
-                    src={user.avatar}
                     className={classes.large}
+                    src={`http://localhost:5000${user.avatarUrl}`}
                   />
+                  <input
+                    type="file"
+                    ref={inputImageRef}
+                    onChange={handleChangeFile}
+                  />
+                  {user.avatarUrl ? (
+                    <button onClick={onClickRemoveImage}>удалить фото</button>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="info">
                   <input
@@ -95,7 +125,6 @@ const Profile = () => {
                     }}
                     value={user.email}
                   />
-                  <input type="file" />
                 </div>
               </div>
             </>
