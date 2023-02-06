@@ -18,5 +18,12 @@
 .avatar {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  align-items: baseline;
   margin-bottom: 30px;
+  text-align: center;
+
+   & > .avatarBlock > *{
+    margin: 10px;
+   }
 }

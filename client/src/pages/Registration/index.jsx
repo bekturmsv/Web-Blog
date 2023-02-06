@@ -73,7 +73,11 @@ export const Registration = () => {
             onChange={handleChangeFile}
           />
           {avatar && (
-            <>
+            <div className={styles.avatarBlock}>
+              <Avatar
+                sx={{ width: 100, height: 100 }}
+                src={`http://localhost:5000${avatar}`}
+              />
               <Button
                 variant="contained"
                 color="error"
@@ -81,11 +85,7 @@ export const Registration = () => {
               >
                 Удалить
               </Button>
-              <Avatar
-                sx={{ width: 100, height: 100 }}
-                src={`http://localhost:5000${avatar}`}
-              />
-            </>
+            </div>
           )}
         </div>
         <TextField
