@@ -58,7 +58,7 @@ app.delete("/posts/:id", chekAuth, PostController.remove)
 app.patch("/posts/:id",chekAuth, postCreateValidation,handleValidationErrors,PostController.update)
 
 
-app.listen(process.env.PORT || 5000, (err)=>{
+app.listen(process.env.PORT || 6000, (err)=>{
     if(err){
         return console.log(err);
     }
