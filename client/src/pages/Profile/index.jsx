@@ -77,7 +77,7 @@ const Profile = () => {
                 <div className="ava">
                   <Avatar
                     alt="Remy Sharp"
-                    src={`http://localhost:5000${user.avatarUrl}`}
+                    src={`${process.env.REACT_APP_API_URL}${user.avatarUrl}`}
                     className={classes.large}
                   />
                   <span className="nick">{user.name}</span>
@@ -97,7 +97,7 @@ const Profile = () => {
                   <Avatar
                     alt="Remy Sharp"
                     className={classes.large}
-                    src={`http://localhost:5000${user.avatarUrl}`}
+                    src={`${process.env.REACT_APP_API_URL}${user.avatarUrl}`}
                   />
                   <input
                     type="file"

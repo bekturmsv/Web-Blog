@@ -43,7 +43,7 @@ export const Header = () => {
                   <Avatar
                     className={styles.avatarLogo}
                     sx={{ width: 40, height: 40 }}
-                    src={`http://localhost:5000${userData.avatarUrl}`}
+                    src={`${process.env.REACT_APP_API_URL}${userData.avatarUrl}`}
                   />
                 </Link>
               </>

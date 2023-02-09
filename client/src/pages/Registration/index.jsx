@@ -76,7 +76,7 @@ export const Registration = () => {
             <div className={styles.avatarBlock}>
               <Avatar
                 sx={{ width: 100, height: 100 }}
-                src={`http://localhost:5000${avatar}`}
+                src={`${process.env.REACT_APP_API_URL}${avatar}`}
               />
               <Button
                 variant="contained"
