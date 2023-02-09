@@ -7,7 +7,7 @@ import  {UserController, PostController} from "./controllers/index.js"
 import { postCreateValidation } from "./validations/post.js";
 import cors from "cors"
 import {handleValidationErrors,chekAuth} from "./utils/index.js"
-mongoose.connect("mongodb+srv://admin:21123145@cluster0.olilxg5.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://admin:21123145@cluster0.olilxg5.mongodb.net/Web-Blog?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -58,7 +58,7 @@ app.delete("/posts/:id", chekAuth, PostController.remove)
 app.patch("/posts/:id",chekAuth, postCreateValidation,handleValidationErrors,PostController.update)
 
 
-app.listen(process.env.PORT || 6000, (err)=>{
+app.listen(5000, (err)=>{
     if(err){
         return console.log(err);
     }
