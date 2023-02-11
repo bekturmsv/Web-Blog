@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect /* useRef */ } from "react";
 import { Avatar, Button } from "@material-ui/core";
 import axiosBaseUrl from "../../axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = () => {
-  const inputImageRef = useRef(null);
+  // const inputImageRef = useRef(null);
 
   const userData = useSelector((state) => state.auth.data);
   const classes = useStyles();
@@ -39,22 +39,22 @@ const Profile = () => {
     setUser(data);
   }
 
-  const onClickRemoveImage = () => {
-    setUser({ ...user, avatarUrl: "" });
-  };
+  // const onClickRemoveImage = () => {
+  //   setUser({ ...user, avatarUrl: "" });
+  // };
 
-  const handleChangeFile = async (event) => {
-    try {
-      const formData = new FormData();
-      const file = event.target.files[0];
-      formData.append("image", file);
-      const { data } = await axiosBaseUrl.post("/upload", formData);
-      setUser({ ...user, avatarUrl: data.url });
-    } catch (error) {
-      console.warn(error);
-      alert("Ошибка при загрузке файла");
-    }
-  };
+  // const handleChangeFile = async (event) => {
+  //   try {
+  //     const formData = new FormData();
+  //     const file = event.target.files[0];
+  //     formData.append("image", file);
+  //     const { data } = await axiosBaseUrl.post("/upload", formData);
+  //     setUser({ ...user, avatarUrl: data.url });
+  //   } catch (error) {
+  //     console.warn(error);
+  //     alert("Ошибка при загрузке файла");
+  //   }
+  // };
 
   useEffect(() => {
     showProfile();
@@ -99,7 +99,7 @@ const Profile = () => {
                     className={classes.large}
                     src={`${process.env.REACT_APP_API_URL}${user.avatarUrl}`}
                   />
-                  <input
+                  {/* <input
                     type="file"
                     ref={inputImageRef}
                     onChange={handleChangeFile}
@@ -108,9 +108,10 @@ const Profile = () => {
                     <button onClick={onClickRemoveImage}>удалить фото</button>
                   ) : (
                     ""
-                  )}
+                  )} */}
                 </div>
                 <div className="info">
+                  Full Name:
                   <input
                     type="text"
                     onChange={(e) => {
@@ -118,6 +119,7 @@ const Profile = () => {
                     }}
                     value={user.fullName}
                   />
+                  Email:
                   <input
                     type="text"
                     onChange={(e) => {
