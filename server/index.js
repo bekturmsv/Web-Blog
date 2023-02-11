@@ -7,7 +7,7 @@ import  {UserController, PostController} from "./controllers/index.js"
 import { postCreateValidation } from "./validations/post.js";
 import cors from "cors"
 import {handleValidationErrors,chekAuth} from "./utils/index.js"
-mongoose.connect("mongodb+srv://admin:21123145@cluster0.olilxg5.mongodb.net/Web-Blog?retryWrites=true&w=majority", {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
