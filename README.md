@@ -24,8 +24,51 @@ All client part is in the client folder, all files are in the folder src. The ma
 
 ### How to start locally
 
-1.  `npm install` - install all dependencies
-2.  `npm start` - start a project
+### Note:
+
+It is possible to run the project locally, but it will not work correctly because there is a mongodb uri in the project, and I can not cover this🥺. So you can use this as a template to your projects, in places where api for front and mongodb uri are inserted.
+
+## How to start Front-end side :
+
+1. You must enter the client folder
+
+```bash
+  cd client/
+```
+
+2. Next, you should install all the dependencies
+
+```bash
+  npm install
+```
+
+3. And at the end, start the server
+
+```bash
+  npm start
+```
+
+<br>
+
+## How to start Back-end side :
+
+1. You must enter the server folder
+
+```bash
+  cd server/
+```
+
+2. Next, you should install all the dependencies
+
+```bash
+  npm install
+```
+
+3. And at the end, start the server
+
+```bash
+  npm run dev
+```
 
 ### Technologies used
 
