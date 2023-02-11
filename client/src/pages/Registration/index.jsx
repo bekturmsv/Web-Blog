@@ -1,22 +1,21 @@
-import React, { useRef, useState } from "react";
+import React /* useRef, useState */ from "react";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-
+// import Avatar from "@mui/material/Avatar";
 import styles from "./Login.module.scss";
 import { fetchRegister, selectIsAuth } from "../../redux/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
-import axiosBaseUrl from "../../axios";
+// import axiosBaseUrl from "../../axios";
 
 export const Registration = () => {
-  const inputImageRef = useRef(null);
+  // const inputImageRef = useRef(null);
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
-  const [avatar, setAvatar] = useState("");
+  // const [avatar, setAvatar] = useState("");
   const {
     register,
     handleSubmit,
@@ -25,27 +24,28 @@ export const Registration = () => {
     mode: "onChange",
   });
 
-  const onClickRemoveImage = () => {
-    setAvatar("");
-  };
+  //
+  // const onClickRemoveImage = () => {
+  //   setAvatar("");
+  // };
 
-  const handleChangeFile = async (event) => {
-    try {
-      const formData = new FormData();
-      const file = event.target.files[0];
-      formData.append("image", file);
-      const { data } = await axiosBaseUrl.post("/upload", formData);
-      setAvatar(data.url);
-    } catch (error) {
-      console.warn(error);
-      alert("Ошибка при загрузке файла");
-    }
-  };
+  // const handleChangeFile = async (event) => {
+  //   try {
+  //     const formData = new FormData();
+  //     const file = event.target.files[0];
+  //     formData.append("image", file);
+  //     const { data } = await axiosBaseUrl.post("/upload", formData);
+  //     setAvatar(data.url);
+  //   } catch (error) {
+  //     console.warn(error);
+  //     alert("Ошибка при загрузке файла");
+  //   }
+  // };
 
   const onSubmit = async (values) => {
-    const data = { ...values, avatarUrl: avatar };
-    console.log(data);
-    const user_data = await dispatch(fetchRegister(data));
+    // const data = { ...values, avatarUrl: avatar };
+    // console.log(data);
+    const user_data = await dispatch(fetchRegister(values));
     if (!user_data.payload) {
       alert("Не удалось зарегистрироваться!");
     }
@@ -66,7 +66,7 @@ export const Registration = () => {
       </Typography>
 
       <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.avatar}>
+        {/* <div className={styles.avatar}>
           <TextField
             type="file"
             ref={inputImageRef}
@@ -87,7 +87,7 @@ export const Registration = () => {
               </Button>
             </div>
           )}
-        </div>
+        </div> */}
         <TextField
           error={Boolean(errors.fullName?.message)}
           helperText={errors.fullName?.message}
