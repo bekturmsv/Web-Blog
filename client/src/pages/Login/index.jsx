@@ -58,6 +58,7 @@ export const Login = () => {
           error={Boolean(errors.password?.message)}
           helperText={errors.password?.message}
           fullWidth
+          type = "password"
           {...register("password", { required: "Enter your password" })}
         />
         <Button
