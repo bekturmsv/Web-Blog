@@ -102,7 +102,7 @@ export const AddPost = () => {
 
   return (
     <Paper style={{ padding: 30 }}>
-      <Button
+      {/* <Button
         onClick={() => inputImageRef.current.click()}
         variant="outlined"
         size="large"
@@ -132,7 +132,7 @@ export const AddPost = () => {
         </>
       )}
       <br />
-      <br />
+      <br /> */}
       <TextField
         classes={{ root: styles.title }}
         variant="standard"
