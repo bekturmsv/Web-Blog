@@ -13,7 +13,7 @@ export const Header = () => {
   const userData = useSelector((state) => state.auth.data);
 
   const onClickLogout = () => {
-    if (window.confirm("Вы уверены что хотите выйти?")) {
+    if (window.confirm("Are you sure you want to get out?")) {
       dispatch(logout());
       window.localStorage.removeItem("token");
     }
@@ -30,14 +30,14 @@ export const Header = () => {
             {isAuth ? (
               <>
                 <Link to="/add">
-                  <Button variant="contained">Написать статью</Button>
+                  <Button variant="contained">Write an article</Button>
                 </Link>
                 <Button
                   onClick={onClickLogout}
                   variant="contained"
                   color="error"
                 >
-                  Выйти
+                  Log out
                 </Button>
                 <Link to={`/profile/${userData._id}`}>
                   <Avatar
@@ -50,10 +50,10 @@ export const Header = () => {
             ) : (
               <>
                 <Link to="/login">
-                  <Button variant="outlined">Войти</Button>
+                  <Button variant="outlined">Log in</Button>
                 </Link>
                 <Link to="/register">
-                  <Button variant="contained">Создать аккаунт</Button>
+                  <Button variant="contained">Create Account</Button>
                 </Link>
               </>
             )}

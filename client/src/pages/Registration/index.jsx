@@ -47,7 +47,7 @@ export const Registration = () => {
     // console.log(data);
     const user_data = await dispatch(fetchRegister(values));
     if (!user_data.payload) {
-      alert("Не удалось зарегистрироваться!");
+      alert("Failed to register!");
     }
 
     if ("token" in user_data.payload) {
@@ -62,7 +62,7 @@ export const Registration = () => {
   return (
     <Paper classes={{ root: styles.root }}>
       <Typography classes={{ root: styles.title }} variant="h5">
-        Создание аккаунта
+        Creating an account
       </Typography>
 
       <form action="" onSubmit={handleSubmit(onSubmit)}>
@@ -91,15 +91,15 @@ export const Registration = () => {
         <TextField
           error={Boolean(errors.fullName?.message)}
           helperText={errors.fullName?.message}
-          {...register("fullName", { required: "Укажите полное имя" })}
+          {...register("fullName", { required: "Enter your full name" })}
           className={styles.field}
-          label="Полное имя"
+          label="Full name"
           fullWidth
         />
         <TextField
           error={Boolean(errors.email?.message)}
           helperText={errors.email?.message}
-          {...register("email", { required: "Укажите почту" })}
+          {...register("email", { required: "Specify mail" })}
           type="email"
           className={styles.field}
           label="E-Mail"
@@ -108,10 +108,10 @@ export const Registration = () => {
         <TextField
           error={Boolean(errors.password?.message)}
           helperText={errors.password?.message}
-          {...register("password", { required: "Укажите пароль" })}
+          {...register("password", { required: "Enter your password" })}
           type="password"
           className={styles.field}
-          label="Пароль"
+          label="password"
           fullWidth
         />
         <Button
@@ -121,7 +121,7 @@ export const Registration = () => {
           variant="contained"
           fullWidth
         >
-          Зарегистрироваться
+          Sign up
         </Button>
       </form>
     </Paper>

@@ -18,7 +18,7 @@ export const FullPost = () => {
       })
       .catch((err) => {
         console.warn(err);
-        alert("Ошибка при получении статьи");
+        alert("Error in obtaining an article");
       });
   }, []);
 

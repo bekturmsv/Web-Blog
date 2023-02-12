@@ -26,7 +26,7 @@ export const Home = () => {
         value={0}
         aria-label="basic tabs example"
       >
-        <Tab label="Новые" />
+        <Tab label="New" />
       </Tabs>
       <Grid container spacing={4}>
         <Grid xs={8} item>

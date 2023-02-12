@@ -34,7 +34,7 @@ export const AddPost = () => {
       setPostObj({ ...postObj, imageUrl: data.url });
     } catch (error) {
       console.warn(error);
-      alert("Ошибка при загрузке файла");
+      alert("Error downloading the file");
     }
   };
 
@@ -58,7 +58,7 @@ export const AddPost = () => {
       const _id = isEditing ? id : data._id;
       navigate(`/posts/${_id}`);
     } catch (error) {
-      console.warn("Ошибка при создании статьи!");
+      console.warn("Error in article creation!");
     }
   };
 
@@ -86,7 +86,7 @@ export const AddPost = () => {
       spellChecker: false,
       maxHeight: "400px",
       autofocus: true,
-      placeholder: "Введите текст...",
+      placeholder: "Enter text...",
       status: false,
       autosave: {
         enabled: true,
@@ -107,7 +107,7 @@ export const AddPost = () => {
         variant="outlined"
         size="large"
       >
-        {isEditing ? "Изменить превью" : "Загрузить превью"}
+        {isEditing ? "Change preview" : "Download previews"}
       </Button>
       <input
         ref={inputImageRef}
@@ -122,7 +122,7 @@ export const AddPost = () => {
             color="error"
             onClick={onClickRemoveImage}
           >
-            Удалить
+            Delete
           </Button>
           <img
             className={styles.image}
@@ -136,7 +136,7 @@ export const AddPost = () => {
       <TextField
         classes={{ root: styles.title }}
         variant="standard"
-        placeholder="Заголовок статьи..."
+        placeholder="Article Title..."
         value={postObj.title}
         onChange={(e) => {
           setPostObj({ ...postObj, title: e.target.value });
@@ -146,7 +146,7 @@ export const AddPost = () => {
       <TextField
         classes={{ root: styles.tags }}
         variant="standard"
-        placeholder="Тэги"
+        placeholder="Tags:"
         value={postObj.tags}
         onChange={(e) => {
           setPostObj({ ...postObj, tags: e.target.value });
@@ -161,10 +161,10 @@ export const AddPost = () => {
       />
       <div className={styles.buttons}>
         <Button onClick={onSubmit} size="large" variant="contained">
-          {isEditing ? "Сохранить" : "Опубликовать"}
+          {isEditing ? "Save" : "Publish"}
         </Button>
         <a href="/">
-          <Button size="large">Отмена</Button>
+          <Button size="large">Cancel</Button>
         </a>
       </div>
     </Paper>
