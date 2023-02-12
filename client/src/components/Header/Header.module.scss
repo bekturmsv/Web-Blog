@@ -32,11 +32,16 @@
 .buttons {
   button {
     margin-left: 10px;
-    background-color: rgb(28, 18, 53);
+    background-color: rgb(28, 18, 53) !important;
     color: #fff;
     font-weight: bold;
   }
-  
+
+  button:hover{
+    background-color: #ecebea !important;
+    color: #000;
+
+  }
   a {
     text-decoration: none;
   }
