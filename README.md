@@ -1,6 +1,6 @@
 # Web Blog
 
-### Preview: https://web-blog-by-beka.vercel.app/
+### Demo: https://web-blog-by-beka.vercel.app/
 
 ## About 📓
 
