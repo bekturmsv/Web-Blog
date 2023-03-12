@@ -1,8 +1,6 @@
 # Web Blog
 
-### Demo: https://codify-cifund.vercel.app/
-
-<!-- https://web-blog-by-beka.vercel.app/ -->
+### Demo: https://web-blog-by-beka.vercel.app/
 
 ## About 📓
 
